@@ -18,8 +18,10 @@ class MovieLens:
     
     def loadMovieLensLatestSmall(self):
 
-        # Look for files relative to the directory we are running from
-        os.chdir(os.path.dirname(sys.argv[0]))
+        if not os.path.isfile(self.ratingsPath):
+            raise FileNotFoundError(f"Expected file {self.ratingsPath} not found")
+
+        os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
         ratingsDataset = 0
         self.movieID_to_name = {}
